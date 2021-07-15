@@ -6,6 +6,7 @@ import nguyenhuuhung.b17dccn298.model.KhachHang;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +39,9 @@ public class KhachHangService {
     public List<KhachHang> getAll(){
         return this.khachHangRepository.findAll();
     }
+    public List<KhachHang> search(String keyword){
+        return this.khachHangRepository.findAllByHoTen(keyword);
+    }
 
     public boolean deleteById(Long id){
         Optional<KhachHang> byId = this.khachHangRepository.findById(id);
@@ -46,5 +50,12 @@ public class KhachHangService {
             return true;
         }
         return false;
+    }
+    public List<KhachHang> getById(Long id){
+        Optional<KhachHang> byId = this.khachHangRepository.findById(id);
+        if(!byId.isPresent()){
+            throw new BadRequestException("id khach hang khong ton tai!");
+        }
+        return Arrays.asList(byId.get());
     }
 }

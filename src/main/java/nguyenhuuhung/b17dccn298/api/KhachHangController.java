@@ -22,6 +22,18 @@ public class KhachHangController {
         ResponseBodyDto<List<KhachHang>> response=new ResponseBodyDto(KhachHangs, ResponseCodeEnum.R_200,"OK",KhachHangs.size());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseBodyDto<List<KhachHang>>> getById(@PathVariable Long id){
+        List<KhachHang> KhachHangs = khachHangService.getById(id);
+        ResponseBodyDto<List<KhachHang>> response=new ResponseBodyDto(KhachHangs, ResponseCodeEnum.R_200,"OK",KhachHangs.size());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<ResponseBodyDto<List<KhachHang>>> findAllByName(@PathVariable String keyword){
+        List<KhachHang> KhachHangs = khachHangService.search(keyword);
+        ResponseBodyDto<List<KhachHang>> response=new ResponseBodyDto(KhachHangs, ResponseCodeEnum.R_200,"OK",KhachHangs.size());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
     @PostMapping
     public ResponseEntity<ResponseBodyDto<KhachHang>> createOrUpdate(@RequestBody KhachHang request){
         KhachHang khachHang = khachHangService.createOrUpdate(request);

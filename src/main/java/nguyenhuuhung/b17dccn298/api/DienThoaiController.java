@@ -23,6 +23,18 @@ public class DienThoaiController {
         ResponseBodyDto<List<DienThoai>> response=new ResponseBodyDto(dienThoais, ResponseCodeEnum.R_200,"OK",dienThoais.size());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<ResponseBodyDto<List<DienThoai>>> findAllByName(@PathVariable String keyword){
+        List<DienThoai> dienThoais = dienThoaiService.search(keyword);
+        ResponseBodyDto<List<DienThoai>> response=new ResponseBodyDto(dienThoais, ResponseCodeEnum.R_200,"OK",dienThoais.size());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseBodyDto<List<DienThoai>>> getById(@PathVariable Long id){
+        List<DienThoai> dienThoais = dienThoaiService.getById(id);
+        ResponseBodyDto<List<DienThoai>> response=new ResponseBodyDto(dienThoais, ResponseCodeEnum.R_200,"OK",dienThoais.size());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
     @PostMapping
     public ResponseEntity<ResponseBodyDto<DienThoai>> createOrUpdate(@RequestBody DienThoai request){
         DienThoai dienThoai = dienThoaiService.createOrUpdate(request);

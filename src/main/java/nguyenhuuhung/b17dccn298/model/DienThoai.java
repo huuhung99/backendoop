@@ -1,10 +1,12 @@
 package nguyenhuuhung.b17dccn298.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +21,7 @@ public class DienThoai{
     protected String hangSanXuat;
     protected String model;
     protected Float donGia;
-    @OneToOne(mappedBy = "dienThoai")
-    protected Item item;
+    @JsonIgnore
+    @OneToMany(mappedBy = "dienThoai")
+    protected List<Item> item;
 }

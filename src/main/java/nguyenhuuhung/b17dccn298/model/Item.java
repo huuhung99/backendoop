@@ -15,12 +15,14 @@ public class Item{
     private Long id;
     private Float giaBan;
     private Integer soLuong;
-    @OneToOne
+    @ManyToOne
     @PrimaryKeyJoinColumn(name = "dien_thoai_id")
     private DienThoai dienThoai;
-    @ManyToOne
-    @JoinColumn(name = "hoa_don_id") // thông qua khóa ngoại id
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private HoaDon hoaDon;
+//    @ManyToOne
+//    @JoinColumn(name = "hoa_don_id") // thông qua khóa ngoại id
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
+//    private HoaDon hoaDon;
+    @Column(name = "hoa_don_id")
+    private Long hoaDon;
 }

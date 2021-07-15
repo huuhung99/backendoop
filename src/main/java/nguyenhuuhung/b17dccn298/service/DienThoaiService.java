@@ -3,9 +3,11 @@ package nguyenhuuhung.b17dccn298.service;
 import nguyenhuuhung.b17dccn298.Repository.DienThoaiRepository;
 import nguyenhuuhung.b17dccn298.error.BadRequestException;
 import nguyenhuuhung.b17dccn298.model.DienThoai;
+import nguyenhuuhung.b17dccn298.model.KhachHang;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,5 +51,16 @@ public class DienThoaiService {
             return true;
         }
         return false;
+    }
+
+    public List<DienThoai> getById(Long id) {
+        Optional<DienThoai> byId = this.dienThoaiRepository.findById(id);
+        if(!byId.isPresent()){
+            throw new BadRequestException("id điện thoại không tồn tại");
+        }
+        return Arrays.asList(byId.get());
+    }
+    public List<DienThoai> search(String keyword){
+        return this.dienThoaiRepository.findAllByTen(keyword);
     }
 }

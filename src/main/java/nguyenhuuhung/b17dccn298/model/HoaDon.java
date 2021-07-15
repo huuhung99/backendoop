@@ -21,6 +21,6 @@ public class HoaDon{
     private Date thoiGianTaoHoaDon;
     @OneToOne
     private KhachHang khachHang;
-    @OneToMany(mappedBy = "hoaDon")
+    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.MERGE)
     private List<Item> item;
 }

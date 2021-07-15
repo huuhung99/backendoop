@@ -23,6 +23,12 @@ public class HoaDonController {
         ResponseBodyDto<List<HoaDon>> response=new ResponseBodyDto(HoaDons, ResponseCodeEnum.R_200,"OK",HoaDons.size());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseBodyDto<HoaDon>> getById(@PathVariable Long id){
+        HoaDon hoaDons = hoaDonService.getById(id);
+        ResponseBodyDto<HoaDon> response=new ResponseBodyDto(hoaDons, ResponseCodeEnum.R_200,"OK");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
     @PostMapping
     public ResponseEntity<ResponseBodyDto<HoaDon>> createOrUpdate(@RequestBody HoaDon request){
         HoaDon hoaDon = hoaDonService.createOrUpdate(request);
